@@ -1,28 +1,42 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.by import By
+import time
+import os
 
-# Selenium Grid / Remote WebDriver server
-server_url = "http://127.0.0.1:4444/wd/hub"
+# Tell Selenium explicitly where chromedriver is
+CHROMEDRIVER_PATH = "/usr/bin/chromedriver"  # default path in selenium/standalone-chrome
+CHROME_BINARY_PATH = "/usr/bin/google-chrome"  # optional, if needed
 
-# Configure Firefox options
-options = Options()
-options.headless = True  # run in headless mode
+# Set Chrome options
+options = webdriver.ChromeOptions()
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--headless')  # comment this if you want to see GUI
 
-# Point to the GeckoDriver service (not strictly needed if geckodriver is in PATH)
-service = Service()
+# Point to correct Chrome binary (optional, usually not needed)
+options.binary_location = CHROME_BINARY_PATH
 
-# Create remote WebDriver session
-driver = webdriver.Remote(
-    command_executor=server_url,
-    options=options,
-    service=service
-)
+# Create WebDriver manually using Service object
+from selenium.webdriver.chrome.service import Service
 
-print("Loading page...")
-driver.get("https://fedoramagazine.org/")
-print("Loaded:", driver.title)
+service = Service(CHROMEDRIVER_PATH)
+driver = webdriver.Chrome(service=service, options=options)
 
-assert "Fedora" in driver.title
-driver.quit()
-print("Done.")
+try:
+    # Open Google
+    driver.get("https://www.google.com")
+    print("Page title is:", driver.title)
+
+    time.sleep(2)
+
+    # Perform a search
+    search_box = driver.find_element(By.NAME, "q")
+    search_box.send_keys("Podman Selenium Test")
+    search_box.submit()
+
+    time.sleep(2)
+    print("New page title is:", driver.title)
+
+finally:
+    # Quit the driver
+    driver.quit()

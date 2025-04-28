@@ -13,6 +13,10 @@ http://127.0.0.1:5000
 
 ## 3 Selenium
 
-podman build -t selenium-python .
-docker build -t selenium-firefox-fedora .
-podman run -t --rm --network host -v $(pwd)/browser-test.py:/browser-test.py:z selenium-python python3 browser-test.py
+podman build -t selenium-python-chrome .
+
+podman run --rm -it -p 4444:4444 -p 5900:5900 -p 7900:7900 --shm-size 2g selenium-python-chrome
+podman run --rm -it -p 4444:4444 -p 5900:5900 -p 7900:7900 --shm-size 2g selenium-python-chrome bash
+
+podman run -it --rm --shm-size=2g selenium-python-chrome
+podman run -it --rm --shm-size=2g selenium-python-chrome bash
