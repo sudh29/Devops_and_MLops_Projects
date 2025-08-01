@@ -11,3 +11,9 @@ terraform plan -var 'user=["Ram","Shyam"]'
 terraform plan -var-file=dev.tfvars
 
 export TF_VAR_username=user1
+
+terraform providers
+terraform init
+terraform plan
+terraform apply
+terraform apply --auto-approve
