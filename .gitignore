@@ -220,7 +220,7 @@ override.tf.json
 # CLI configuration files
 .terraformrc
 terraform.rc
-
+.terraform.lock.hcl
 # Ignore SSH private keys
 *.pem
 *.ppk
