@@ -1,3 +1,11 @@
+# Create an S3 bucket for Terraform backend storage
+#   Bucket name: "terrabackendtest"
+#
+# Create a DynamoDB table for state locking
+#   Table name: "terrabackendtest-table"
+#   Primary key (partition key): "LockID"
+
+
 terraform {
   backend "s3" {
     bucket         = "terrabackendtest"
