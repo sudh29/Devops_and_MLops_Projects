@@ -193,6 +193,7 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Terraform
 # Local .terraform directories
 **/.terraform/*
 
@@ -216,13 +217,58 @@ override.tf.json
 
 # Terraform plan output files
 *.tfplan
+*.plan
 
 # CLI configuration files
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
-# Ignore SSH private keys
+
+# Terraform backend configuration
+backend.tf
+backend.hcl
+
+# Provider configuration that may contain sensitive data
+provider*.tf
+# Docker and Podman
+.docker/
+docker-compose.override.yml
+*.env
+.env.*
+docker-compose.override.yaml
+Dockerfile.local
+.dockerignore
+
+# Apache
+apache-logs/
+*.pid
+*.sock
+httpd.conf.local
+.htaccess.local
+apache2.conf.local
+
+# Airflow
+airflow.cfg
+airflow.db
+airflow-webserver.pid
+logs/
+unittests.cfg
+airflow_login.py
+airflow-worker.pid
+*.pid
+webserver_config.py
+airflow.cfg.local
+
+# Ignore SSH private keys and credentials
 *.pem
 *.ppk
 awstf
 awstf.pub
+*.key
+*.crt
+*.csr
+id_rsa*
+id_ed25519*
+known_hosts
+credentials.yml
+*_credentials.*
