@@ -2,6 +2,8 @@
 
 This repository contains a collection of DevOps and MLOps projects focusing on various tools and technologies.
 
+## Tools and Technologies
+
 ## Projects
 
 ### [Terraform Projects](./Terraform/README.md)
